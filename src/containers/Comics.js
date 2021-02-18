@@ -28,11 +28,12 @@ const Comics = () => {
         <p>En cours de chargement...</p>
     ) : (
         <div className="bg-white">
+            <Search />
+
             {data.results.map((comics, indexComics) => {
                 // console.log(comics.title);
                 return (
                     <div key={comics._id}>
-                        <Search />
                         {comics.title}
 
                         <img
