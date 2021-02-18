@@ -12,6 +12,17 @@ a {
     color: inherit;
 }
 
+h1 {
+    font-weight: bold;
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .bg {
     background: rgb(4, 1, 64);
     background: linear-gradient(
@@ -75,11 +86,52 @@ a {
     justify-content: center;
     padding: 20px;
     color: white;
-    height: 100px;
+    height: 40px;
     text-transform: uppercase;
     font-size: 18px;
+    justify-content: space-between;
 }
 
 .menu a {
     padding: 10px 40px;
+}
+
+.menu a img {
+    max-height: 40px;
+}
+
+.comics {
+    display: flex;
+    max-width: 1280px;
+    margin: 0 auto;
+    flex-flow: row wrap;
+}
+
+.comics > div {
+    width: calc(100% / 4 - 252px / 3);
+    padding: 0 30px;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    transition-duration: 0.7s;
+    margin-bottom: 70px;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+.comics div img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.comics div p {
+    font-size: 18px;
+    line-height: 2;
+    text-align: justify;
+}
+
+.comics > div:hover {
+    box-shadow: 10px 10px 80px -24px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 80px -24px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 80px -24px rgba(0, 0, 0, 0.75);
 }

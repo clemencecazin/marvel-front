@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "../components/Search";
 
 const Comics = () => {
     const [data, setData] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
+    const [resultSearch, setresultSearch] = useState("");
+
+    // const search = (event) => {
+    //     // console.log(event.target.value);
+    //     setresultSearch(event.target.value); // Assigne le résultat à la state
+
+    //     console.log(resultSearch);
+    // };
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:3001/comics"
+                    `http://localhost:3001/comics?title=${resultSearch}`
                 );
                 const comics = response.data.comics;
                 // console.log(response.data.comics);
@@ -22,32 +29,44 @@ const Comics = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [resultSearch]);
 
     return isLoading ? (
         <p>En cours de chargement...</p>
     ) : (
         <div className="bg-white">
-            <Search />
+            <div>
+                <input
+                    type="search"
+                    placeholder="Rechercher"
+                    onChange={(event) => {
+                        setresultSearch(event.target.value);
+                        console.log(resultSearch);
+                    }}
+                />
+            </div>
+            <div className="comics">
+                {data.results.map((comics, indexComics) => {
+                    // console.log(comics.title);
+                    return (
+                        <div>
+                            <div key={comics._id}>
+                                <h1>{comics.title}</h1>
 
-            {data.results.map((comics, indexComics) => {
-                // console.log(comics.title);
-                return (
-                    <div key={comics._id}>
-                        {comics.title}
-
-                        <img
-                            src={
-                                comics.thumbnail.path +
-                                "." +
-                                comics.thumbnail.extension
-                            }
-                            alt={comics.title}
-                        />
-                        {comics.description}
-                    </div>
-                );
-            })}
+                                <img
+                                    src={
+                                        comics.thumbnail.path +
+                                        "." +
+                                        comics.thumbnail.extension
+                                    }
+                                    alt={comics.title}
+                                />
+                                <p>{comics.description}</p>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };

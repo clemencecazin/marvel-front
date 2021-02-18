@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const Search = () => {
+const Search = ({ data, setData }) => {
     const [resultSearch, setresultSearch] = useState();
 
     const search = (event) => {
@@ -14,8 +14,10 @@ const Search = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3001/comics/?title=${resultSearch}`
+                    `http://localhost:3001/comics/search/?title=${resultSearch}`
                 );
+
+                setData(response.data);
 
                 console.log(response.data);
             } catch (error) {
@@ -23,7 +25,7 @@ const Search = () => {
             }
         };
         fetchData();
-    }, [resultSearch]);
+    }, [resultSearch, setData]);
 
     return (
         <div>

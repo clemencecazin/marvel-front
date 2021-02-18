@@ -7,12 +7,14 @@ const Characters = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (event) => {
             const limit = 100;
+            const skip = 0;
+
             // Définit le nombre de résultat que l'on veut sur la page
             try {
                 const response = await axios.get(
-                    `http://localhost:3001/characters/?limit=${limit}`
+                    `http://localhost:3001/characters/?skip=${skip}&limit=${limit}`
                 );
                 // Assigne la query limit pour lier au back
                 const characters = response.data.characters;
@@ -31,28 +33,32 @@ const Characters = () => {
         <p>En cours de chargement...</p>
     ) : (
         <div className="bg-white">
-            {data.results.map((characters, index) => {
-                // console.log(characters._id);
+            <div className="comics">
+                {data.results.map((characters, index) => {
+                    // console.log(characters._id);
 
-                return (
-                    <div key={characters._id}>
-                        {/* Renvoyer l'ID du personnage en param */}
-                        <Link to={`/characterId/${characters._id}`}>
-                            {characters.name}
-                            <img
-                                src={
-                                    characters.thumbnail.path +
-                                    "." +
-                                    characters.thumbnail.extension
-                                }
-                                alt={characters.name}
-                            />
+                    return (
+                        <div>
+                            <div key={characters._id}>
+                                {/* Renvoyer l'ID du personnage en param */}
+                                <Link to={`/characterId/${characters._id}`}>
+                                    <h1>{characters.name}</h1>
+                                    <img
+                                        src={
+                                            characters.thumbnail.path +
+                                            "." +
+                                            characters.thumbnail.extension
+                                        }
+                                        alt={characters.name}
+                                    />
 
-                            {characters.description}
-                        </Link>
-                    </div>
-                );
-            })}
+                                    <p>{characters.description}</p>
+                                </Link>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };
