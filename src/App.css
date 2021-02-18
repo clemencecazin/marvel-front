@@ -1,1 +1,85 @@
 /* Other rules */
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Marvel", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 200;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.bg {
+    background: rgb(4, 1, 64);
+    background: linear-gradient(
+        37deg,
+        rgba(4, 1, 64, 1) 0%,
+        rgba(23, 5, 50, 1) 14%,
+        rgba(32, 7, 43, 1) 33%,
+        rgba(78, 5, 36, 1) 49%,
+        rgba(201, 1, 17, 1) 81%,
+        rgba(255, 0, 0, 1) 100%
+    );
+
+    /* background: rgb(4, 1, 64);
+    background: linear-gradient(
+        37deg,
+        rgba(4, 1, 64, 1) 0%,
+        rgba(23, 5, 50, 1) 38%,
+        rgba(69, 8, 96, 1) 70%,
+        rgba(112, 6, 74, 1) 100%
+    ); */
+    height: 100vh;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.bloc {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    position: relative;
+    max-width: 500px;
+}
+
+.logo img:first-child {
+    width: 100%;
+    box-shadow: 3px 4px 52px -3px rgba(0, 0, 0, 0.58);
+    -webkit-box-shadow: 3px 4px 52px -3px rgba(0, 0, 0, 0.58);
+    -moz-box-shadow: 3px 4px 52px -3px rgba(0, 0, 0, 0.58);
+}
+
+.logo img:nth-child(2) {
+    opacity: 0.12;
+    width: 100%;
+    height: 201px;
+    object-fit: cover;
+    position: absolute;
+    background-image: url(./assets/image.jpg);
+    border: transparent 15px solid;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    color: white;
+    height: 100px;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.menu a {
+    padding: 10px 40px;
+}
