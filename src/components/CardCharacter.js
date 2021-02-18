@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const CardCharacter = () => {
+    // Récupérer l'ID du param
     const { characterId } = useParams();
     // console.log(characterId);
 
@@ -15,6 +16,9 @@ const CardCharacter = () => {
                 const response = await axios.get(
                     `http://localhost:3001/comics/${characterId}`
                 );
+
+                // Apppelle le param
+                // Résultat de la requête selon l'Id du perso
 
                 const character = response.data.characters;
                 // console.log(character);

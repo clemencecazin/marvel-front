@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Search from "../components/Search";
 
 const Comics = () => {
     const [data, setData] = useState();
@@ -31,7 +32,9 @@ const Comics = () => {
                 // console.log(comics.title);
                 return (
                     <div key={comics._id}>
+                        <Search />
                         {comics.title}
+
                         <img
                             src={
                                 comics.thumbnail.path +
@@ -40,7 +43,6 @@ const Comics = () => {
                             }
                             alt={comics.title}
                         />
-
                         {comics.description}
                     </div>
                 );

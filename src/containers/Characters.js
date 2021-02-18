@@ -8,12 +8,15 @@ const Characters = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            const limit = 100;
+            // Définit le nombre de résultat que l'on veut sur la page
             try {
                 const response = await axios.get(
-                    "http://localhost:3001/characters"
+                    `http://localhost:3001/characters/?limit=${limit}`
                 );
+                // Assigne la query limit pour lier au back
                 const characters = response.data.characters;
-                // console.log(response.data.characters);
+                console.log(response.data.characters);
 
                 setData(characters);
                 setIsLoading(false);
