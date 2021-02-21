@@ -8,6 +8,7 @@ const Characters = ({ setCharacter }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [resultSearch, setresultSearch] = useState("");
     const [iconStyle, setIconStyle] = useState("icon");
+    // const [tabId, setTabId] = useState([]);
 
     useEffect(() => {
         const fetchData = async (event) => {
@@ -34,19 +35,22 @@ const Characters = ({ setCharacter }) => {
     }, [resultSearch]);
 
     const favorites = (event) => {
-        if (event) {
-            setIconStyle("red");
-            setCharacter(event);
+        setCharacter(event);
+        console.log(event);
+    };
 
-            // Si un id est présent on l'envoi à la fonction setCharacterId
+    const handleCheck = (event) => {
+        // console.log(event);
 
-            // let idCharacters = "";
+        // const newTab = [...tabId];
+        setIconStyle("red");
 
-            // for (let i = 0; i < data.results.length; i++) {
-            //     idCharacters = data.results[i]._id;
-            //     setCharacterId(idCharacters);
-            // }
-        }
+        // for (let i = 0; i < newTab.length; i++) {
+        //     if (newTab[i].event === event) {
+        //         newTab[i].check = !newTab[i].check;
+        //     }
+        // }
+        // setTabId(newTab);
     };
 
     return isLoading ? (
@@ -92,13 +96,19 @@ const Characters = ({ setCharacter }) => {
                                 </Link>
 
                                 <span
-                                    className={iconStyle}
                                     onClick={(event) => {
                                         favorites(characters._id);
                                     }}
                                 >
                                     {/* AU CLIC on appelle une fonction qui a commen argument l'id du character et on l'envoi en event */}
-                                    <FontAwesomeIcon icon="heart" />
+
+                                    <FontAwesomeIcon
+                                        onClick={(event) =>
+                                            handleCheck(characters._id)
+                                        }
+                                        className={iconStyle}
+                                        icon="heart"
+                                    />
                                 </span>
                             </div>
                         </div>

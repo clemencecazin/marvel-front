@@ -35,6 +35,10 @@ h2 {
     transform: translate(-50%, -50%);
 }
 
+::placeholder {
+    color: #bfbfbf;
+}
+
 .bg {
     background: rgb(4, 1, 64);
     background: linear-gradient(
@@ -67,6 +71,8 @@ h2 {
     display: flex;
     justify-content: center;
 }
+
+/* HOME */
 
 .logo {
     display: flex;
@@ -121,8 +127,9 @@ h2 {
     max-width: 1280px;
     margin: 0 auto;
     flex-flow: row wrap;
-    justify-content: center;
 }
+
+/* COMIC CHARACTERS */
 
 .comics .card {
     width: calc(100% / 4 - 252px / 3);
@@ -135,6 +142,7 @@ h2 {
     display: flex;
     align-items: center;
     min-width: 235px;
+    position: relative;
 }
 
 .comics .card img {
@@ -171,14 +179,37 @@ h2 {
     font-size: 20px;
     outline: none;
     background-color: #f7f7f7;
+    border-radius: none;
 }
 
-::placeholder {
-    color: #bfbfbf;
+.card div div {
+    padding: 10px 0;
+    justify-content: center;
+    width: 50%;
+    margin-bottom: 30px;
+    border-bottom: #000 solid 1px;
+    transition-duration: 1.2s;
 }
 
-.perso {
+.card div div:hover {
+    padding: 10px 0;
+    justify-content: center;
+    width: 50%;
+    margin-bottom: 30px;
+    color: red;
+    border-bottom: red solid 1px;
 }
+
+.icon {
+    font-size: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+.red {
+    color: red;
+}
+
+/* CHARACTERS ID */
 
 .perso > div:nth-child(2) {
     display: flex;
@@ -212,30 +243,7 @@ h2 {
     width: 100%;
 }
 
-.card div div {
-    padding: 10px 0;
-    justify-content: center;
-    width: 50%;
-    margin-bottom: 30px;
-    border-bottom: #000 solid 1px;
-    transition-duration: 1.2s;
-}
-
-.card div div:hover {
-    padding: 10px 0;
-    justify-content: center;
-    width: 50%;
-    margin-bottom: 30px;
-    color: red;
-    border-bottom: red solid 1px;
-}
-
-.icon {
-    font-size: 40px;
-}
-.red {
-    color: red;
-}
+/* LOADING */
 
 .loading {
     height: 80%;
@@ -260,8 +268,9 @@ h2 {
     transform: rotate(-20deg);
     padding: 20px;
     text-align: center;
-    align-items: center;
 }
+
+/* RESPONSIVE */
 
 @media (max-width: 720px) {
     .menu {

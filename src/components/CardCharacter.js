@@ -36,7 +36,6 @@ const CardCharacter = () => {
     return isLoading ? (
         <div className="loading">
             <div>
-                {" "}
                 <strong>Page en cours de chargement...</strong>
             </div>
         </div>

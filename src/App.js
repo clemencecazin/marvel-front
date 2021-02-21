@@ -23,14 +23,8 @@ function App() {
     const setCharacter = (id) => {
         // Reçoit l'id quand on a cliqué sur favori
         Cookies.set("charactersId", id, { expires: 2000 });
+
         setCharactersId(id);
-        console.log(charactersId);
-        // // console.log(tab);
-        // for (let i = 0; i < favoritesCharacter.length; i++) {
-        //     console.log(favoritesCharacter[i]);
-        //     favoritesCharacter = favoritesCharacter + favoritesCharacter[i];
-        //     // console.log(tab);
-        // }
     };
     return (
         <div className="bg">

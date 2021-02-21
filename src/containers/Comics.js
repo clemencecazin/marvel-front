@@ -34,7 +34,6 @@ const Comics = () => {
     return isLoading ? (
         <div className="loading">
             <div>
-                {" "}
                 <strong>Page en cours de chargement...</strong>
             </div>
         </div>
@@ -54,8 +53,8 @@ const Comics = () => {
                 {data.results.map((comics, indexComics) => {
                     // console.log(comics.title);
                     return (
-                        <div className="card">
-                            <div key={comics._id}>
+                        <div key={comics._id} className="card">
+                            <div>
                                 <h1>{comics.title}</h1>
 
                                 <img
