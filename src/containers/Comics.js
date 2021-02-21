@@ -17,7 +17,7 @@ const Comics = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3001/comics?title=${resultSearch}`
+                    `https://marvel-backend-clemence.herokuapp.com/comics?title=${resultSearch}`
                 );
                 const comics = response.data.comics;
                 // console.log(response.data.comics);
@@ -32,24 +32,29 @@ const Comics = () => {
     }, [resultSearch]);
 
     return isLoading ? (
-        <p>En cours de chargement...</p>
+        <div className="loading">
+            <div>
+                {" "}
+                <strong>Page en cours de chargement...</strong>
+            </div>
+        </div>
     ) : (
         <div className="bg-white">
-            <div>
-                <input
-                    type="search"
-                    placeholder="Rechercher"
-                    onChange={(event) => {
-                        setresultSearch(event.target.value);
-                        console.log(resultSearch);
-                    }}
-                />
-            </div>
             <div className="comics">
+                <div>
+                    <input
+                        type="search"
+                        placeholder="Rechercher un comics"
+                        onChange={(event) => {
+                            setresultSearch(event.target.value);
+                            console.log(resultSearch);
+                        }}
+                    />
+                </div>
                 {data.results.map((comics, indexComics) => {
                     // console.log(comics.title);
                     return (
-                        <div>
+                        <div className="card">
                             <div key={comics._id}>
                                 <h1>{comics.title}</h1>
 

@@ -14,7 +14,7 @@ const CardCharacter = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3001/comics/${characterId}`
+                    `https://marvel-backend-clemence.herokuapp.com/comics/${characterId}`
                 );
 
                 // Apppelle le param
@@ -34,35 +34,43 @@ const CardCharacter = () => {
     }, [setData, characterId]);
 
     return isLoading ? (
-        <p>En cours de chargement...</p>
+        <div className="loading">
+            <div>
+                {" "}
+                <strong>Page en cours de chargement...</strong>
+            </div>
+        </div>
     ) : (
         <div className="bg-white">
-            {console.log(data)}
+            <div className="perso">
+                <div>
+                    <img
+                        src={
+                            data.thumbnail.path + "." + data.thumbnail.extension
+                        }
+                        alt=""
+                    />
 
-            <img
-                src={data.thumbnail.path + "." + data.thumbnail.extension}
-                alt=""
-            />
-
-            {data.name}
-
-            <div>
-                {data.comics.map((comics, indexCardComics) => {
-                    return (
-                        <div key={comics.title}>
-                            {comics.title}
-                            {comics.description}
-                            <img
-                                src={
-                                    comics.thumbnail.path +
-                                    "." +
-                                    comics.thumbnail.extension
-                                }
-                                alt=""
-                            />
-                        </div>
-                    );
-                })}
+                    <h2>{data.name}</h2>
+                </div>
+                <div>
+                    {data.comics.map((comics, indexCardComics) => {
+                        return (
+                            <div key={indexCardComics}>
+                                <h3>{comics.title}</h3>
+                                <p>{comics.description}</p>
+                                <img
+                                    src={
+                                        comics.thumbnail.path +
+                                        "." +
+                                        comics.thumbnail.extension
+                                    }
+                                    alt=""
+                                />
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );

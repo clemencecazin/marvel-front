@@ -17,10 +17,22 @@ h1 {
     font-weight: 700;
     font-size: 40px;
     text-align: center;
-    height: 180px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Anton", sans-serif;
+}
+
+h2 {
+    position: absolute;
+    top: 0;
+    font-family: "Anton", sans-serif;
+    font-size: 2.5em;
+    color: white;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .bg {
@@ -48,6 +60,7 @@ h1 {
 
 .bg-white {
     background-color: #fff;
+    height: 100%;
 }
 
 .bloc {
@@ -73,12 +86,12 @@ h1 {
 
 .logo img:nth-child(2) {
     opacity: 0.12;
-    width: 100%;
     height: 201px;
     object-fit: cover;
     position: absolute;
     background-image: url(./assets/image.jpg);
     border: transparent 15px solid;
+    width: 100vw;
 }
 
 .menu {
@@ -94,6 +107,9 @@ h1 {
 
 .menu a {
     padding: 10px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .menu a img {
@@ -105,33 +121,168 @@ h1 {
     max-width: 1280px;
     margin: 0 auto;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
-.comics > div {
+.comics .card {
     width: calc(100% / 4 - 252px / 3);
     padding: 0 30px;
     border: 2px solid transparent;
-    border-radius: 25px;
     transition-duration: 0.7s;
     margin-bottom: 70px;
     margin-right: 20px;
     margin-top: 30px;
+    display: flex;
+    align-items: center;
+    min-width: 235px;
 }
 
-.comics div img {
+.comics .card img {
     width: 100%;
     height: 300px;
     object-fit: cover;
 }
 
-.comics div p {
+.comics .card p {
     font-size: 18px;
     line-height: 2;
     text-align: justify;
 }
 
-.comics > div:hover {
+.comics .card:hover {
     box-shadow: 10px 10px 80px -24px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 10px 10px 80px -24px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 80px -24px rgba(0, 0, 0, 0.75);
+}
+
+.comics > div:first-child {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+.comics > div input {
+    width: 80%;
+    padding: 20px;
+    border-bottom: 2px solid #4c4c4c;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 20px;
+    outline: none;
+    background-color: #f7f7f7;
+}
+
+::placeholder {
+    color: #bfbfbf;
+}
+
+.perso {
+}
+
+.perso > div:nth-child(2) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.perso > div:first-child {
+    background-color: black;
+    height: 40vh;
+    position: relative;
+}
+
+.perso > div:first-child img {
+    width: 100vw;
+    height: 40vh;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.5;
+    background-color: black;
+}
+.perso > div:nth-child(2) div {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    padding: 60px;
+    font-size: 18px;
+}
+
+.perso > div:nth-child(2) div img {
+    width: 100%;
+}
+
+.card div div {
+    padding: 10px 0;
+    justify-content: center;
+    width: 50%;
+    margin-bottom: 30px;
+    border-bottom: #000 solid 1px;
+    transition-duration: 1.2s;
+}
+
+.card div div:hover {
+    padding: 10px 0;
+    justify-content: center;
+    width: 50%;
+    margin-bottom: 30px;
+    color: red;
+    border-bottom: red solid 1px;
+}
+
+.icon {
+    font-size: 40px;
+}
+.red {
+    color: red;
+}
+
+.loading {
+    height: 80%;
+    background-repeat: no-repeat;
+    margin: auto;
+    max-width: 300px;
+    color: white;
+    font-size: 25px;
+    padding: 20px;
+}
+
+.loading div {
+    background: url(./assets/thor.gif);
+    border: white 10px solid;
+    height: calc(100vh - 30px);
+    display: flex;
+    justify-content: center;
+    opacity: 0.6;
+    margin-top: 30px;
+    -webkit-box-shadow: 6px 2px 18px 0px rgba(0, 0, 0, 0.62);
+    box-shadow: 6px 2px 18px 0px rgba(0, 0, 0, 0.62);
+    transform: rotate(-20deg);
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+@media (max-width: 720px) {
+    .menu {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .comics > div input {
+        margin-top: 30px;
+    }
+    .comics > div:first-child {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    .comics .card {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        margin-right: 0;
+    }
 }
