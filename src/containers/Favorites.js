@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 const Favorites = ({ charactersId }) => {
     const [data, setData] = useState();
