@@ -2,28 +2,45 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
 
-const Characters = ({ setCharacter }) => {
-    const [data, setData] = useState();
+const Characters = ({ setFavCharacter }) => {
+    const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [resultSearch, setresultSearch] = useState("");
+    const [next, setNext] = useState();
+    const [page, setPage] = useState(1);
+    const [skip, setSkip] = useState(0);
+    const [limit, setLimit] = useState(100);
+
     const [iconStyle, setIconStyle] = useState("icon");
+    let icon = false;
+    let cookie = Cookies.get("fav");
+    const [favorite, setFavorite] = useState(
+        (cookie && JSON.parse(cookie)) || [[], []]
+    );
+
     // const [tabId, setTabId] = useState([]);
 
     useEffect(() => {
         const fetchData = async (event) => {
-            const limit = 100;
-            const skip = 0;
-
             // Définit le nombre de résultat que l'on veut sur la page
             try {
                 const response = await axios.get(
                     `https://marvel-backend-clemence.herokuapp.com/characters/?name=${resultSearch}&skip=${skip}&limit=${limit}`
                 );
-                // Assigne la query limit pour lier au back
-                const characters = response.data.characters;
-                console.log(response.data.characters);
 
+                console.log(response.data);
+                setNext(response.data.characters.count);
+                // Assigne la query limit pour lier au back
+                const characters = response.data.characters.results;
+                // console.log(characters);
+
+                // Adding Fav icon in every objects
+                for (let i = 0; i < characters.length; i++) {
+                    characters[i].icon = false;
+                    // console.log(characters[i]);
+                }
                 setData(characters);
 
                 setIsLoading(false);
@@ -32,25 +49,62 @@ const Characters = ({ setCharacter }) => {
             }
         };
         fetchData();
-    }, [resultSearch]);
+    }, [resultSearch, skip]);
 
-    const favorites = (event) => {
-        setCharacter(event);
-        console.log(event);
+    const addFavorites = (fav) => {
+        // Reçoit l'objet mis en favori quand on a cliqué
+
+        console.log("fav");
+
+        fav.icon = true;
+
+        const newTabFav = [...favorite];
+
+        console.log(newTabFav);
+
+        const exist = newTabFav.find((elem) => elem._id === fav._id);
+
+        if (!exist) {
+            newTabFav.push(fav);
+            alert("Favoris ajouté !");
+        } else {
+            alert("Caractère déjà en favoris !");
+        }
+
+        Cookies.set("fav", JSON.stringify(newTabFav), {
+            expires: 2000,
+        });
     };
 
-    const handleCheck = (event) => {
-        // console.log(event);
+    const handleCheck = (icon) => {
+        if (icon) {
+            return <FontAwesomeIcon className="red" icon="heart" />;
+        } else {
+            return <FontAwesomeIcon className={iconStyle} icon="heart" />;
+        }
+    };
 
-        // const newTab = [...tabId];
-        setIconStyle("red");
+    const nextPage = () => {
+        console.log(next);
+        console.log(page);
+        console.log(resultSearch.length);
+        console.log(skip);
 
-        // for (let i = 0; i < newTab.length; i++) {
-        //     if (newTab[i].event === event) {
-        //         newTab[i].check = !newTab[i].check;
-        //     }
-        // }
-        // setTabId(newTab);
+        console.log(data);
+
+        if (page * limit < next) {
+            setPage(page + 1);
+            let newSkip = skip + limit;
+            setSkip(newSkip);
+        }
+    };
+
+    const previousPage = () => {
+        if (page * limit < next) {
+            setPage(page - 1);
+            let newSkip = skip - limit;
+            setSkip(newSkip);
+        }
     };
 
     return isLoading ? (
@@ -61,6 +115,37 @@ const Characters = ({ setCharacter }) => {
         </div>
     ) : (
         <div className="bg-white">
+            <div className="next-previous">
+                {page > 1 && (
+                    <button
+                        onClick={() => {
+                            previousPage();
+                        }}
+                    >
+                        <div>
+                            <FontAwesomeIcon
+                                className={iconStyle}
+                                icon="caret-left"
+                            />
+                            Page précédente
+                        </div>
+                    </button>
+                )}
+
+                <button
+                    onClick={() => {
+                        nextPage();
+                    }}
+                >
+                    <div>
+                        Page suivante
+                        <FontAwesomeIcon
+                            className={iconStyle}
+                            icon="caret-right"
+                        />
+                    </div>
+                </button>
+            </div>
             <div className="comics">
                 <div>
                     <input
@@ -72,7 +157,8 @@ const Characters = ({ setCharacter }) => {
                         }}
                     />
                 </div>
-                {data.results.map((characters, indexCharacters) => {
+
+                {data.map((characters, indexCharacters) => {
                     // console.log(characters._id);
 
                     return (
@@ -94,21 +180,14 @@ const Characters = ({ setCharacter }) => {
 
                                     <div>En savoir +</div>
                                 </Link>
-
                                 <span
                                     onClick={(event) => {
-                                        favorites(characters._id);
+                                        addFavorites(characters);
+                                        characters.icon = true;
                                     }}
                                 >
+                                    {handleCheck(characters.icon)}
                                     {/* AU CLIC on appelle une fonction qui a commen argument l'id du character et on l'envoi en event */}
-
-                                    <FontAwesomeIcon
-                                        onClick={(event) =>
-                                            handleCheck(characters._id)
-                                        }
-                                        className={iconStyle}
-                                        icon="heart"
-                                    />
                                 </span>
                             </div>
                         </div>

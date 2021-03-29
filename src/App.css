@@ -33,6 +33,11 @@ h2 {
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+button {
+    outline: none;
 }
 
 ::placeholder {
@@ -133,7 +138,7 @@ h2 {
 
 .comics .card {
     width: calc(100% / 4 - 252px / 3);
-    padding: 0 30px;
+    padding: 10px 30px;
     border: 2px solid transparent;
     transition-duration: 0.7s;
     margin-bottom: 70px;
@@ -209,6 +214,46 @@ h2 {
     color: red;
 }
 
+.bg-white .perso > div {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.bg-white > div button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    color: #ac0319;
+    margin-right: 20px;
+    cursor: pointer;
+    font-family: "Marvel";
+}
+
+.bg-white > div button:hover {
+    background-color: #ac0319;
+    color: #f7f7f7;
+}
+
+.bg-white > div button div {
+    display: flex;
+    align-items: center;
+}
+
+.bg-white > div button div svg {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+.next-previous {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
 /* CHARACTERS ID */
 
 .perso > div:nth-child(2) {
@@ -221,10 +266,12 @@ h2 {
     background-color: black;
     height: 40vh;
     position: relative;
+    min-height: 300px;
 }
 
 .perso > div:first-child img {
     width: 100vw;
+    min-height: 100%;
     height: 40vh;
     object-fit: cover;
     object-position: center;

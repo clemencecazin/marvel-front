@@ -9,23 +9,26 @@ import Header from "./components/Header";
 import Favorites from "./containers/Favorites";
 import Cookies from "js-cookie";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-library.add(faHeart);
+import {
+    faHeart,
+    faCaretRight,
+    faCaretLeft,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faHeart, faCaretRight, faCaretLeft);
 
 function App() {
-    const [charactersId, setCharactersId] = useState(
-        Cookies.get("charactersId") || null
-    );
+    const [favorite, setFavorite] = useState(Cookies.get("fav") || null);
 
     // let favoritesCharacter = Cookies.get("charactersId") || null;
 
     // Garder le favoris en mémoire
-    const setCharacter = (id) => {
-        // Reçoit l'id quand on a cliqué sur favori
-        Cookies.set("charactersId", id, { expires: 2000 });
+    // const setFavCharacter = (fav) => {
+    //     // Reçoit l'id quand on a cliqué sur favori
+    //     const favs = Cookies.get("fav");
+    //     Cookies.set("favorite", favs, { expires: 2000 });
 
-        setCharactersId(id);
-    };
+    //     setFavorite(favs);
+    // };
     return (
         <div className="bg">
             <Router>
@@ -33,10 +36,10 @@ function App() {
 
                 <Switch>
                     <Route path="/favorites">
-                        <Favorites charactersId={charactersId} />
+                        <Favorites favorite={favorite} />
                     </Route>
                     <Route path="/characters">
-                        <Characters setCharacter={setCharacter} />
+                        <Characters />
                     </Route>
                     <Route path="/characterId/:characterId">
                         <CardCharacter />

@@ -21,7 +21,7 @@ const CardCharacter = () => {
                 // Résultat de la requête selon l'Id du perso
 
                 const character = response.data.characters;
-                // console.log(character);
+                console.log(character);
 
                 setData(character);
 
@@ -50,26 +50,34 @@ const CardCharacter = () => {
                         alt=""
                     />
 
-                    <h2>{data.name}</h2>
+                    <h2>
+                        Comics <br />
+                        {data.name}
+                    </h2>
                 </div>
-                <div>
-                    {data.comics.map((comics, indexCardComics) => {
-                        return (
-                            <div key={indexCardComics}>
-                                <h3>{comics.title}</h3>
-                                <p>{comics.description}</p>
-                                <img
-                                    src={
-                                        comics.thumbnail.path +
-                                        "." +
-                                        comics.thumbnail.extension
-                                    }
-                                    alt=""
-                                />
-                            </div>
-                        );
-                    })}
-                </div>
+
+                {data.comics.length === 0 ? (
+                    "Pas de comics associé pour ce personnage pour le moment"
+                ) : (
+                    <div>
+                        {data.comics.map((comics, indexCardComics) => {
+                            return (
+                                <div key={indexCardComics}>
+                                    <h3>{comics.title}</h3>
+                                    <p>{comics.description}</p>
+                                    <img
+                                        src={
+                                            comics.thumbnail.path +
+                                            "." +
+                                            comics.thumbnail.extension
+                                        }
+                                        alt=""
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </div>
     );
