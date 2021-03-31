@@ -132,6 +132,7 @@ button {
     max-width: 1280px;
     margin: 0 auto;
     flex-flow: row wrap;
+    justify-content: space-between;
 }
 
 /* COMIC CHARACTERS */
@@ -290,6 +291,21 @@ button {
     width: 100%;
 }
 
+/* FAVORIS */
+
+.no-charac {
+    text-align: center;
+    font-size: 30px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fav {
+    font-size: 30px;
+}
+
 /* LOADING */
 
 .loading {
@@ -318,6 +334,11 @@ button {
 }
 
 /* RESPONSIVE */
+@media (max-width: 1280px) {
+    .comics {
+        justify-content: center;
+    }
+}
 
 @media (max-width: 720px) {
     .menu {
@@ -325,6 +346,10 @@ button {
         justify-content: center;
         flex-direction: column;
         height: auto;
+    }
+
+    .comics {
+        justify-content: center;
     }
 
     .comics > div input {

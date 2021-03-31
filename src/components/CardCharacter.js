@@ -57,7 +57,9 @@ const CardCharacter = () => {
                 </div>
 
                 {data.comics.length === 0 ? (
-                    "Pas de comics associé pour ce personnage pour le moment"
+                    <div className="no-charac">
+                        Pas de comics associés à ce personnage pour le moment
+                    </div>
                 ) : (
                     <div>
                         {data.comics.map((comics, indexCardComics) => {

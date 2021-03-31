@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import ListingCharacters from "../components/ListingCharacters";
 
 // import axios from "axios";
 
 const Favorites = () => {
-    const [data, setData] = useState();
-    const [favorite, setFavorite] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         if (Cookies.get("fav")) {
@@ -15,7 +14,7 @@ const Favorites = () => {
 
             const productFavObj = JSON.parse(favo);
 
-            setFavorite(productFavObj);
+            setData(productFavObj);
 
             console.log(productFavObj);
         }
@@ -23,40 +22,13 @@ const Favorites = () => {
 
     return (
         <div className="bg-white">
-            {favorite.length === 0 ? (
-                "Pas encore de favoris"
+            {data.length === 0 ? (
+                <div className="no-charac">
+                    Vous n'avez pas encore de personnages en favoris
+                </div>
             ) : (
                 <div className="comics">
-                    {favorite.map((fav, indexCharacters) => {
-                        // console.log(characters._id);
-
-                        return fav.length !== 0 ? (
-                            <div className="card" key={fav._id}>
-                                <div>
-                                    {/* Renvoyer l'ID du personnage en param */}
-                                    <Link to={`/characterId/${fav._id}`}>
-                                        <h1>{fav.name}</h1>
-                                        {fav.thumbnail && (
-                                            <img
-                                                src={
-                                                    fav.thumbnail.path +
-                                                    "." +
-                                                    fav.thumbnail.extension
-                                                }
-                                                alt={fav.name}
-                                            />
-                                        )}
-
-                                        <p>{fav.description}</p>
-
-                                        <div>En savoir +</div>
-                                    </Link>
-                                </div>
-                            </div>
-                        ) : (
-                            <div>Vos personnages favoris</div>
-                        );
-                    })}
+                    <ListingCharacters data={data} />
                 </div>
             )}
         </div>

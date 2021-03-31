@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
+import ListingCharacters from "../components/ListingCharacters";
 
 const Characters = ({ setFavCharacter }) => {
     const [data, setData] = useState([]);
@@ -11,13 +11,13 @@ const Characters = ({ setFavCharacter }) => {
     const [next, setNext] = useState();
     const [page, setPage] = useState(1);
     const [skip, setSkip] = useState(0);
-    const [limit, setLimit] = useState(100);
+    const limit = 100;
 
     const [iconStyle, setIconStyle] = useState("icon");
     let icon = false;
     let cookie = Cookies.get("fav");
     const [favorite, setFavorite] = useState(
-        (cookie && JSON.parse(cookie)) || [[], []]
+        (cookie && JSON.parse(cookie)) || [[]]
     );
 
     // const [tabId, setTabId] = useState([]);
@@ -53,10 +53,10 @@ const Characters = ({ setFavCharacter }) => {
 
     const addFavorites = (fav) => {
         // Reçoit l'objet mis en favori quand on a cliqué
+        console.log("data");
 
+        console.log(data);
         console.log("fav");
-
-        fav.icon = true;
 
         const newTabFav = [...favorite];
 
@@ -66,9 +66,11 @@ const Characters = ({ setFavCharacter }) => {
 
         if (!exist) {
             newTabFav.push(fav);
-            alert("Favoris ajouté !");
+            alert("Personnage ajouté aux favoris  !");
+            data.icon = true;
+            fav.icon = true;
         } else {
-            alert("Caractère déjà en favoris !");
+            alert("Ce personnage est déjà dans vos favoris !");
         }
 
         Cookies.set("fav", JSON.stringify(newTabFav), {
@@ -77,7 +79,9 @@ const Characters = ({ setFavCharacter }) => {
     };
 
     const handleCheck = (icon) => {
-        if (icon) {
+        console.log(data.icon);
+
+        if (data.icon) {
             return <FontAwesomeIcon className="red" icon="heart" />;
         } else {
             return <FontAwesomeIcon className={iconStyle} icon="heart" />;
@@ -85,13 +89,6 @@ const Characters = ({ setFavCharacter }) => {
     };
 
     const nextPage = () => {
-        console.log(next);
-        console.log(page);
-        console.log(resultSearch.length);
-        console.log(skip);
-
-        console.log(data);
-
         if (page * limit < next) {
             setPage(page + 1);
             let newSkip = skip + limit;
@@ -158,41 +155,7 @@ const Characters = ({ setFavCharacter }) => {
                     />
                 </div>
 
-                {data.map((characters, indexCharacters) => {
-                    // console.log(characters._id);
-
-                    return (
-                        <div className="card" key={characters._id}>
-                            <div>
-                                {/* Renvoyer l'ID du personnage en param */}
-                                <Link to={`/characterId/${characters._id}`}>
-                                    <h1>{characters.name}</h1>
-                                    <img
-                                        src={
-                                            characters.thumbnail.path +
-                                            "." +
-                                            characters.thumbnail.extension
-                                        }
-                                        alt={characters.name}
-                                    />
-
-                                    <p>{characters.description}</p>
-
-                                    <div>En savoir +</div>
-                                </Link>
-                                <span
-                                    onClick={(event) => {
-                                        addFavorites(characters);
-                                        characters.icon = true;
-                                    }}
-                                >
-                                    {handleCheck(characters.icon)}
-                                    {/* AU CLIC on appelle une fonction qui a commen argument l'id du character et on l'envoi en event */}
-                                </span>
-                            </div>
-                        </div>
-                    );
-                })}
+                <ListingCharacters data={data} addFavorites={addFavorites} />
             </div>
         </div>
     );
