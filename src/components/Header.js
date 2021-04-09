@@ -10,6 +10,8 @@ const Header = ({ setUser, userToken }) => {
             <Link to="/characters">Personnages</Link>
             <Link to="/comics">Comics</Link>
             <Link to="/favorites">Favoris</Link>
+
+            {/* If no userToken info */}
             {!userToken ? (
                 <div>
                     <Link to="/login">Se connecter</Link>

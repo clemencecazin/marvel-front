@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Login = ({ setUser }) => {
     const [email, setEmail] = useState();
@@ -9,7 +9,6 @@ const Login = ({ setUser }) => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const history = useHistory();
-    const location = useLocation();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,10 +20,9 @@ const Login = ({ setUser }) => {
                     { email: email, password: password }
                 );
 
-                // If Token send back to Publish else send back to Home
+                // Si le token est reconnu on revoi vers la page Favoris
                 if (response.data.token) {
                     setUser(response.data.token);
-
                     history.push("/favorites");
                 }
             } catch (error) {
@@ -41,7 +39,6 @@ const Login = ({ setUser }) => {
     };
 
     // Au clic on appelle l'API login on vérifie si me mdp et user sont valides, on enregistre le token retourné dans la fonction setUser
-    // History permet de renvoyer vers la page sur laquelle on était
 
     return (
         <div className="signup-container">

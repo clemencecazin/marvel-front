@@ -7,14 +7,9 @@ const Comics = () => {
 
     const [resultSearch, setresultSearch] = useState("");
 
-    // const search = (event) => {
-    //     // console.log(event.target.value);
-    //     setresultSearch(event.target.value); // Assigne le résultat à la state
-
-    //     console.log(resultSearch);
-    // };
     useEffect(() => {
         const fetchData = async () => {
+            // Appel des la liste des comics avec la fonctionnalité de recherche
             try {
                 const response = await axios.get(
                     `https://marvel-backend-clemence.herokuapp.com/comics?title=${resultSearch}`
@@ -40,6 +35,8 @@ const Comics = () => {
     ) : (
         <div className="bg-white">
             <div className="comics">
+                {/* Barre de recherche */}
+
                 <div>
                     <input
                         type="search"
@@ -50,8 +47,9 @@ const Comics = () => {
                         }}
                     />
                 </div>
+
+                {/* Liste des comics */}
                 {data.results.map((comics, indexComics) => {
-                    // console.log(comics.title);
                     return (
                         <div key={comics._id} className="card">
                             <div>

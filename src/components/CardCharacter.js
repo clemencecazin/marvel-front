@@ -56,6 +56,7 @@ const CardCharacter = () => {
                     </h2>
                 </div>
 
+                {/* Liste des comics associés aux personnages si il y en a */}
                 {data.comics.length === 0 ? (
                     <div className="no-charac">
                         Pas de comics associés à ce personnage pour le moment

@@ -1,29 +1,22 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Cookies from "js-cookie";
 import ListingCharacters from "../components/ListingCharacters";
+import NextPreviousPage from "../components/NextPreviousPage";
 
 const Characters = ({ userToken }) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [resultSearch, setresultSearch] = useState("");
-    const [next, setNext] = useState();
+    const [counter, setCounter] = useState();
     const [page, setPage] = useState(1);
     const [skip, setSkip] = useState(0);
     const limit = 100;
 
-    const [iconStyle, setIconStyle] = useState("icon");
-    let icon = false;
-    let cookie = Cookies.get("fav");
-    const [favorite, setFavorite] = useState(
-        (cookie && JSON.parse(cookie)) || [[]]
-    );
-
-    // const [tabId, setTabId] = useState([]);
+    // let icon = false;
 
     useEffect(() => {
         const fetchData = async (event) => {
+            // Appel la liste des personnages
             // Définit le nombre de résultat que l'on veut sur la page
             try {
                 const response = await axios.get(
@@ -31,12 +24,10 @@ const Characters = ({ userToken }) => {
                 );
 
                 console.log(response.data);
-                setNext(response.data.characters.count);
-                // Assigne la query limit pour lier au back
+                setCounter(response.data.characters.count);
                 const characters = response.data.characters.results;
                 // console.log(characters);
 
-                // Adding Fav icon in every objects
                 for (let i = 0; i < characters.length; i++) {
                     characters[i].icon = false;
                     // console.log(characters[i]);
@@ -51,61 +42,15 @@ const Characters = ({ userToken }) => {
         fetchData();
     }, [resultSearch, skip]);
 
-    const addFavorites = (fav) => {
-        // Reçoit l'objet mis en favori quand on a cliqué
-        console.log("data");
+    // const handleCheck = (icon) => {
+    //     console.log(data.icon);
 
-        console.log(data);
-        console.log("fav");
-
-        const newTabFav = [...favorite];
-
-        console.log(newTabFav);
-
-        const exist = newTabFav.find((elem) => elem._id === fav._id);
-        if (userToken) {
-            if (!exist) {
-                newTabFav.push(fav);
-                alert("Personnage ajouté aux favoris  !");
-                data.icon = true;
-                fav.icon = true;
-            } else {
-                alert("Ce personnage est déjà dans vos favoris !");
-            }
-        } else {
-            alert("Créez vous un compte pour ajouter aux favoris");
-        }
-
-        Cookies.set("fav", JSON.stringify(newTabFav), {
-            expires: 2000,
-        });
-    };
-
-    const handleCheck = (icon) => {
-        console.log(data.icon);
-
-        if (data.icon) {
-            return <FontAwesomeIcon className="red" icon="heart" />;
-        } else {
-            return <FontAwesomeIcon className={iconStyle} icon="heart" />;
-        }
-    };
-
-    const nextPage = () => {
-        if (page * limit < next) {
-            setPage(page + 1);
-            let newSkip = skip + limit;
-            setSkip(newSkip);
-        }
-    };
-
-    const previousPage = () => {
-        if (page * limit < next) {
-            setPage(page - 1);
-            let newSkip = skip - limit;
-            setSkip(newSkip);
-        }
-    };
+    //     if (data.icon) {
+    //         return <FontAwesomeIcon className="red" icon="heart" />;
+    //     } else {
+    //         return <FontAwesomeIcon className={iconStyle} icon="heart" />;
+    //     }
+    // };
 
     return isLoading ? (
         <div className="loading">
@@ -115,37 +60,18 @@ const Characters = ({ userToken }) => {
         </div>
     ) : (
         <div className="bg-white">
-            <div className="next-previous">
-                {page > 1 && (
-                    <button
-                        onClick={() => {
-                            previousPage();
-                        }}
-                    >
-                        <div>
-                            <FontAwesomeIcon
-                                className={iconStyle}
-                                icon="caret-left"
-                            />
-                            Page précédente
-                        </div>
-                    </button>
-                )}
+            {/* Bouton Précédent et Next */}
 
-                <button
-                    onClick={() => {
-                        nextPage();
-                    }}
-                >
-                    <div>
-                        Page suivante
-                        <FontAwesomeIcon
-                            className={iconStyle}
-                            icon="caret-right"
-                        />
-                    </div>
-                </button>
-            </div>
+            <NextPreviousPage
+                counter={counter}
+                page={page}
+                setPage={setPage}
+                limit={limit}
+                setSkip={setSkip}
+                skip={skip}
+            />
+
+            {/* Barre de recherche */}
             <div className="comics">
                 <div>
                     <input
@@ -158,7 +84,8 @@ const Characters = ({ userToken }) => {
                     />
                 </div>
 
-                <ListingCharacters data={data} addFavorites={addFavorites} />
+                {/* Liste des personnages */}
+                <ListingCharacters data={data} userToken={userToken} />
             </div>
         </div>
     );

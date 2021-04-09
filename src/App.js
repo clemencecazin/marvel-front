@@ -19,22 +19,11 @@ import {
 library.add(faHeart, faCaretRight, faCaretLeft);
 
 function App() {
-    const [favorite, setFavorite] = useState(Cookies.get("fav") || null);
     const [userToken, setUserToken] = useState(
         Cookies.get("userToken") || null
     );
 
-    // let favoritesCharacter = Cookies.get("charactersId") || null;
-
-    // Garder le favoris en mémoire
-    // const setFavCharacter = (fav) => {
-    //     // Reçoit l'id quand on a cliqué sur favori
-    //     const favs = Cookies.get("fav");
-    //     Cookies.set("favorite", favs, { expires: 2000 });
-
-    //     setFavorite(favs);
-    // };
-
+    // Cookie ID
     const setUser = (token) => {
         if (token) {
             Cookies.set("userToken", token, { expires: 2 });

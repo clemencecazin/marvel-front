@@ -10,18 +10,24 @@ const Favorites = ({ userToken }) => {
 
     useEffect(() => {
         if (Cookies.get("fav")) {
+            // Get pour Afficher les favoris
+
             const favo = Cookies.get("fav");
 
             const productFavObj = JSON.parse(favo);
 
             setData(productFavObj);
 
-            console.log(productFavObj);
+            // console.log(productFavObj);
         }
     }, []);
 
     return (
         <div className="bg-white">
+            {/* Si pas de userToken, demande de connexion */}
+
+            {/* Si userToken affiche la liste des favoris */}
+
             {!userToken ? (
                 <>
                     <div className="no-login">

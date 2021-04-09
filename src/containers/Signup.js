@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 const Signup = ({ setUser }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -23,12 +22,13 @@ const Signup = ({ setUser }) => {
                         email: email,
                         password: password,
                     }
-                    // Send the informations to DB
+                    // Envoi des données à la base de données
                 );
 
-                console.log(response.data);
                 if (response.data.token) {
+                    // Si Token on le l'envoi à la fonction setUser
                     setUser(response.data.token);
+                    // Redirection sur la page favoris après connexion
                     history.push("/favorites");
                 }
             } catch (error) {
@@ -44,10 +44,9 @@ const Signup = ({ setUser }) => {
         fetchData();
     };
 
-    // OnClick we are calling the API signup, pass all the informations from the form. Save the token in setUser function to keep him in memory.
-
     return (
         <div className="signup-container">
+            {/* Formulaire d'inscription */}
             <h3>S'inscrire</h3>
             <form className="form" onSubmit={handleSubmit}>
                 <input
@@ -77,7 +76,7 @@ const Signup = ({ setUser }) => {
                     }}
                 />
 
-                <button type="submit">Submit</button>
+                <button type="submit">S'inscrire</button>
                 <div>{errorMessage}</div>
             </form>
             <Link to="/Login">Tu as déjà un compte ? Connecte-toi !</Link>
