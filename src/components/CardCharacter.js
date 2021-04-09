@@ -65,7 +65,7 @@ const CardCharacter = () => {
                         {data.comics.map((comics, indexCardComics) => {
                             return (
                                 <div key={indexCardComics}>
-                                    <h3>{comics.title}</h3>
+                                    <h4>{comics.title}</h4>
                                     <p>{comics.description}</p>
                                     <img
                                         src={

@@ -36,6 +36,12 @@ h2 {
     text-align: center;
 }
 
+h3 {
+    font-size: 2.5em;
+    color: white;
+    font-family: "Anton", sans-serif;
+}
+
 button {
     outline: none;
 }
@@ -302,6 +308,34 @@ button {
     align-items: center;
 }
 
+.no-login {
+    text-align: center;
+    font-size: 30px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.no-login div:nth-child(2) {
+    margin-top: 40px;
+}
+
+.no-login div:nth-child(2) a {
+    padding: 20px;
+    background-color: #f7f7f7;
+    color: #ac0319;
+    font-size: 24px;
+    margin: 24px;
+    font-weight: bold;
+}
+
+.no-login div:nth-child(2) a:hover {
+    background-color: #ac0319;
+    color: #f7f7f7;
+}
+
 .fav {
     font-size: 30px;
 }
@@ -331,6 +365,102 @@ button {
     transform: rotate(-20deg);
     padding: 20px;
     text-align: center;
+}
+
+/* HEADER */
+
+.menu div {
+    display: flex;
+}
+
+.menu div a {
+    padding: 20px;
+    border: 1px solid white;
+    margin: 0 20px;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.menu div a:first-child {
+    background-color: #85071e;
+}
+
+.menu div a:hover {
+    background-color: #85071e;
+}
+
+.signout {
+    background-color: #85071e;
+    border: solid 1px white;
+    color: white;
+    font-family: "Marvel", sans-serif;
+    font-size: 16px;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.signout:hover {
+    background-color: transparent;
+}
+
+/* LOGIN */
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.signup-container form {
+    width: 275px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.signup-container form div {
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: #ac0319;
+    color: #f7f7f7;
+    line-height: 1.5;
+}
+
+.signup-container form > input {
+    border: none;
+    height: 35px;
+    margin-bottom: 30px;
+    width: 100%;
+    outline: none;
+    padding: 10px;
+}
+
+.signup-container form > input::placeholder {
+    color: #bebebe;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.signup-container form button {
+    height: 45px;
+    width: 107%;
+    border: solid 1px white;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.signup-container form button:hover {
+    background-color: #85071e;
+}
+
+.signup-container a {
+    color: white;
+    font-size: 16px;
 }
 
 /* RESPONSIVE */

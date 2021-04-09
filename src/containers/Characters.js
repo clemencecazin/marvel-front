@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import ListingCharacters from "../components/ListingCharacters";
 
-const Characters = ({ setFavCharacter }) => {
+const Characters = ({ userToken }) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [resultSearch, setresultSearch] = useState("");
@@ -63,14 +63,17 @@ const Characters = ({ setFavCharacter }) => {
         console.log(newTabFav);
 
         const exist = newTabFav.find((elem) => elem._id === fav._id);
-
-        if (!exist) {
-            newTabFav.push(fav);
-            alert("Personnage ajouté aux favoris  !");
-            data.icon = true;
-            fav.icon = true;
+        if (userToken) {
+            if (!exist) {
+                newTabFav.push(fav);
+                alert("Personnage ajouté aux favoris  !");
+                data.icon = true;
+                fav.icon = true;
+            } else {
+                alert("Ce personnage est déjà dans vos favoris !");
+            }
         } else {
-            alert("Ce personnage est déjà dans vos favoris !");
+            alert("Créez vous un compte pour ajouter aux favoris");
         }
 
         Cookies.set("fav", JSON.stringify(newTabFav), {

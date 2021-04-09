@@ -5,7 +5,7 @@ import ListingCharacters from "../components/ListingCharacters";
 
 // import axios from "axios";
 
-const Favorites = () => {
+const Favorites = ({ userToken }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -22,7 +22,20 @@ const Favorites = () => {
 
     return (
         <div className="bg-white">
-            {data.length === 0 ? (
+            {!userToken ? (
+                <>
+                    <div className="no-login">
+                        <div>
+                            Connectez-vous ou créez un compte pour accéder à vos
+                            favoris
+                        </div>
+                        <div>
+                            <Link to="/Login">Se connecter</Link>
+                            <Link to="/Signup">S'inscrire</Link>
+                        </div>
+                    </div>
+                </>
+            ) : data.length === 0 ? (
                 <div className="no-charac">
                     Vous n'avez pas encore de personnages en favoris
                 </div>

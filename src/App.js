@@ -7,6 +7,8 @@ import Characters from "./containers/Characters";
 import CardCharacter from "./components/CardCharacter";
 import Header from "./components/Header";
 import Favorites from "./containers/Favorites";
+import Login from "./containers/Login";
+import Signup from "./containers/Signup";
 import Cookies from "js-cookie";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -18,6 +20,9 @@ library.add(faHeart, faCaretRight, faCaretLeft);
 
 function App() {
     const [favorite, setFavorite] = useState(Cookies.get("fav") || null);
+    const [userToken, setUserToken] = useState(
+        Cookies.get("userToken") || null
+    );
 
     // let favoritesCharacter = Cookies.get("charactersId") || null;
 
@@ -29,17 +34,36 @@ function App() {
 
     //     setFavorite(favs);
     // };
+
+    const setUser = (token) => {
+        if (token) {
+            Cookies.set("userToken", token, { expires: 2 });
+            // OnCLick, the cookie, is created with his expiration date
+            setUserToken(token);
+        } else {
+            // If no token, we remove userToken to disconnect
+            Cookies.remove("userToken");
+            setUserToken(null);
+        }
+    };
+
     return (
         <div className="bg">
             <Router>
-                <Header />
+                <Header userToken={userToken} setUser={setUser} />
 
                 <Switch>
+                    <Route path="/login">
+                        <Login setUser={setUser} />
+                    </Route>
+                    <Route path="/signup">
+                        <Signup setUser={setUser} />
+                    </Route>
                     <Route path="/favorites">
-                        <Favorites favorite={favorite} />
+                        <Favorites userToken={userToken} />
                     </Route>
                     <Route path="/characters">
-                        <Characters />
+                        <Characters userToken={userToken} />
                     </Route>
                     <Route path="/characterId/:characterId">
                         <CardCharacter />
