@@ -13,6 +13,7 @@ const Signup = ({ setUser }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setErrorMessage("");
         const fetchData = async () => {
             try {
                 const response = await axios.post(

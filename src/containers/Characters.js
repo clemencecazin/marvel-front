@@ -15,7 +15,7 @@ const Characters = ({ userToken }) => {
     // let icon = false;
 
     useEffect(() => {
-        const fetchData = async (event) => {
+        const fetchData = async () => {
             // Appel la liste des personnages
             // Définit le nombre de résultat que l'on veut sur la page
             try {
@@ -72,6 +72,7 @@ const Characters = ({ userToken }) => {
             />
 
             {/* Barre de recherche */}
+
             <div className="comics">
                 <div>
                     <input
@@ -79,10 +80,13 @@ const Characters = ({ userToken }) => {
                         placeholder="Rechercher un personnage"
                         onChange={(event) => {
                             setresultSearch(event.target.value);
-                            console.log(resultSearch);
                         }}
                     />
                 </div>
+
+                {data.length === 0 && (
+                    <div className="no-charac">Aucun personnage trouvé</div>
+                )}
 
                 {/* Liste des personnages */}
                 <ListingCharacters

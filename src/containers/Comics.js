@@ -49,25 +49,29 @@ const Comics = () => {
                 </div>
 
                 {/* Liste des comics */}
-                {data.results.map((comics, indexComics) => {
-                    return (
-                        <div key={comics._id} className="card">
-                            <div>
-                                <h1>{comics.title}</h1>
+                {data.length === 0 ? (
+                    <div className="no-charac">Aucun comics trouvé</div>
+                ) : (
+                    data.results.map((comics) => {
+                        return (
+                            <div key={comics._id} className="card">
+                                <div>
+                                    <h1>{comics.title}</h1>
 
-                                <img
-                                    src={
-                                        comics.thumbnail.path +
-                                        "." +
-                                        comics.thumbnail.extension
-                                    }
-                                    alt={comics.title}
-                                />
-                                <p>{comics.description}</p>
+                                    <img
+                                        src={
+                                            comics.thumbnail.path +
+                                            "." +
+                                            comics.thumbnail.extension
+                                        }
+                                        alt={comics.title}
+                                    />
+                                    <p>{comics.description}</p>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })
+                )}
             </div>
         </div>
     );
