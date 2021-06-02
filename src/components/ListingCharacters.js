@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import { useState } from "react";
 
-const ListingCharacters = ({ data, userToken }) => {
+const ListingCharacters = ({ data, userToken, setData }) => {
     let cookie = Cookies.get("fav");
     const [favorite, setFavorite] = useState(
         (cookie && JSON.parse(cookie)) || [[]]
     );
 
-    const addFavorites = (fav) => {
+    const addFavorites = (fav, index) => {
         // Reçoit l'objet mis en favori quand on a cliqué
 
         // Copie
@@ -31,9 +31,11 @@ const ListingCharacters = ({ data, userToken }) => {
             alert("Créez un compte pour ajouter aux favoris");
         }
 
-        Cookies.set("fav", JSON.stringify(newTabFav), {
+        const cookiesFav = Cookies.set("fav", JSON.stringify(newTabFav), {
             expires: 2000,
         });
+
+        console.log(favorite);
     };
 
     return (
@@ -63,8 +65,10 @@ const ListingCharacters = ({ data, userToken }) => {
                             {data[0].length !== 0 ? (
                                 <span
                                     onClick={(event) => {
-                                        addFavorites(characters);
-                                        characters.icon = true;
+                                        addFavorites(
+                                            characters,
+                                            indexCharacters
+                                        );
                                     }}
                                 >
                                     <FontAwesomeIcon

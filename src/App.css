@@ -195,21 +195,20 @@ button {
 }
 
 .card div div {
-    padding: 10px 0;
+    padding: 10px 10px;
     justify-content: center;
     width: 50%;
     margin-bottom: 30px;
     border-bottom: #000 solid 1px;
-    transition-duration: 1.2s;
+    transition: 1.2s ease-out;
+    background: linear-gradient(to left, transparent 50%, #ac0319 50%) right;
+    background-size: 200%;
+    transition: 0.5s ease-out;
 }
 
 .card div div:hover {
-    padding: 10px 0;
-    justify-content: center;
-    width: 50%;
-    margin-bottom: 30px;
-    color: red;
-    border-bottom: red solid 1px;
+    color: #fff;
+    background-position: left;
 }
 
 .icon {
@@ -470,12 +469,29 @@ button {
     }
 }
 
+@media (max-width: 960px) {
+    .menu a {
+        padding: 10px;
+    }
+}
+
 @media (max-width: 720px) {
     .menu {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
         height: auto;
+    }
+
+    .menu div {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .menu div a {
+        margin-top: 20px;
+        min-width: 200px;
     }
 
     .comics {

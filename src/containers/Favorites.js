@@ -16,9 +16,9 @@ const Favorites = ({ userToken }) => {
 
             const productFavObj = JSON.parse(favo);
 
-            setData(productFavObj);
+            if (productFavObj) setData(productFavObj);
 
-            // console.log(productFavObj);
+            console.log(data);
         }
     }, []);
 

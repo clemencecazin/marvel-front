@@ -85,7 +85,11 @@ const Characters = ({ userToken }) => {
                 </div>
 
                 {/* Liste des personnages */}
-                <ListingCharacters data={data} userToken={userToken} />
+                <ListingCharacters
+                    data={data}
+                    userToken={userToken}
+                    setDate={setData}
+                />
             </div>
         </div>
     );
